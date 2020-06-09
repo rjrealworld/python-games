@@ -6,7 +6,7 @@ import os
 #setup Screen
 wn = turtle.Screen()
 wn.bgcolor("black")
-wn.bgpic("space.gif")
+#wn.bgpic("space.gif")
 wn.tracer(3)
 
 #Draw border
@@ -102,7 +102,7 @@ while True:
         if isCollision(player, goals[count]):
             goals[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
             goals[count].right(random.randint(0, 360))
-            os.system("aplay collision.mp3&")
+            os.system("aplay bounce.mp3&")
             score += 1
 
 			#Draw the score on the screen
