@@ -6,7 +6,7 @@ import os
 #setup Screen
 wn = turtle.Screen()
 wn.bgcolor("black")
-wn.bgpic("space.gif")
+wn.bgpic("sapce.gif")
 wn.tracer(3)
 
 #Draw border
@@ -66,16 +66,12 @@ def isCollision(t1, t2):
     d = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2))
     return (d < 20)
 
-def endGame():
-    wn.bye()
-
 #Set keyboard bindings
 turtle.listen()
 turtle.onkey(turnleft, "Left")
 turtle.onkey(turnright, "Right")
 turtle.onkey(increasespeed, "Up")
 turtle.onkey(decreasespeed, "Down")
-turtle.onkey(endGame, "Return")
 
 while True:
     player.forward(speed)
