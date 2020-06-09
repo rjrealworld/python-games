@@ -6,7 +6,7 @@ import os
 #setup Screen
 wn = turtle.Screen()
 wn.bgcolor("black")
-#wn.bgpic("space.gif")
+wn.bgpic("space.gif")
 wn.tracer(3)
 
 #Draw border
