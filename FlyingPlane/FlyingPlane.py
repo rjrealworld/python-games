@@ -36,18 +36,18 @@ maxGoals = 6
 goals = []
 for count in range(maxGoals):
     goals.append(turtle.Turtle())
-    goals[count].color("red")
+    goals[count].color("green")
     goals[count].shape("circle")
     goals[count].penup()
     goals[count].speed(0)
     goals[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
 
 #Create enemies
-maxEnemies = 2
+maxEnemies = 3
 enemies = []
 for count in range(maxEnemies):
     enemies.append(turtle.Turtle())
-    enemies[count].color("green")
+    enemies[count].color("red")
     enemies[count].shape("circle")
     enemies[count].penup()
     enemies[count].speed(0)
@@ -86,15 +86,14 @@ def isCollision(t1, t2):
     d = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2))
     return (d < 20)
 
-def scoreBoard():
+def help():
     mypen.undo()
     mypen.penup()
     mypen.hideturtle()
     mypen.setposition(-180, -30)
     scorestring = "Use arrows to control.\nPress q to exit." 
-    mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
-    wn.tracer()
-    turtle.listen()
+    instruct = mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
+    turtle.ontimer(instruct, 3000)
 
 def endGame():
     wn.bye()
@@ -112,14 +111,14 @@ def gameOver():
     scorestring = "Score: %s\n"%score 
     write = mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
     turtle.ontimer(write, 5000)
-
+    
 #Set keyboard bindings
 turtle.listen()
 turtle.onkey(turnleft, "Left")
 turtle.onkey(turnright, "Right")
 turtle.onkey(increasespeed, "Up")
 turtle.onkey(decreasespeed, "Down")
-turtle.onkey(scoreBoard, "Return")
+turtle.onkey(help, "h")
 turtle.onkey(endGame, "q")
 
 while True:
@@ -171,7 +170,7 @@ while True:
             mypen.penup()
             mypen.hideturtle()
             mypen.setposition(-290, 310)
-            scorestring = "Score: %s\tPress Enter for help" %score
+            scorestring = "Score: %s\tPress h for help and pause" %score
             mypen.write(scorestring, False, align="left", font=("Arial",14, "normal"))
 
 delay = raw_input("Press q to finish.")
