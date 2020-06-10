@@ -10,16 +10,16 @@ wn.bgpic("space.gif")
 wn.tracer(3)
 
 #Draw border
-mypen = turtle.Turtle()
-mypen.color("white")
-mypen.penup()
-mypen.setposition(-300, -300) #Left Bottom
-mypen.pendown()
-mypen.pensize(3)
+border = turtle.Turtle()
+border.color("white")
+border.penup()
+border.setposition(-300, -300) #Left Bottom
+border.pendown()
+border.pensize(3)
 for side in range (4):
-    mypen.forward(600)
-    mypen.left(90)
-mypen.hideturtle()
+    border.forward(600)
+    border.left(90)
+border.hideturtle()
 
 #Create player turtle
 player = turtle.Turtle()
@@ -86,14 +86,17 @@ def isCollision(t1, t2):
     d = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2))
     return (d < 20)
 
+mypen = turtle.Turtle()
 def help():
     mypen.undo()
     mypen.penup()
     mypen.hideturtle()
     mypen.setposition(-180, -30)
+    mypen.color("white")
     scorestring = "Use arrows to control.\nPress q to exit." 
     instruct = mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
     turtle.ontimer(instruct, 3000)
+    mypen.clear()
 
 def endGame():
     wn.bye()
@@ -108,6 +111,7 @@ def gameOver():
     mypen.penup()
     mypen.hideturtle()
     mypen.setposition(-55, -15)
+    mypen.color("white")
     scorestring = "Score: %s\n"%score 
     write = mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
     turtle.ontimer(write, 5000)
@@ -170,6 +174,7 @@ while True:
             mypen.penup()
             mypen.hideturtle()
             mypen.setposition(-290, 310)
+            mypen.color("white")
             scorestring = "Score: %s\tPress h for help and pause" %score
             mypen.write(scorestring, False, align="left", font=("Arial",14, "normal"))
 
