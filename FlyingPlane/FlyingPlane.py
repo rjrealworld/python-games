@@ -2,6 +2,7 @@ import turtle
 import math
 import random
 import os
+import pygame
 
 #setup Screen
 wn = turtle.Screen()
@@ -24,7 +25,7 @@ mypen.hideturtle()
 #Create player turtle
 player = turtle.Turtle()
 player.color("blue")
-player.shape("triangle")
+player.shape("turtle")
 player.penup()
 player.speed(0)
 
@@ -44,6 +45,15 @@ for count in range(maxGaols):
 
 #Set speed variable
 speed = 1
+
+#Sound
+pygame.init()
+bounce_sound = pygame.mixer.Sound("bounce1.wav")
+def bounce():
+    pygame.mixer.Sound.play(bounce_sound)
+
+pygame.mixer.music.load("Mission - AShamaluevMusic.mp3") 
+pygame.mixer.music.play(-1, 0.0) #-1 means music will go on infinitely
 
 #Define functions
 def turnleft():
@@ -66,6 +76,16 @@ def isCollision(t1, t2):
     d = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2))
     return (d < 20)
 
+def scoreBoard():
+    mypen.undo()
+    mypen.penup()
+    mypen.hideturtle()
+    mypen.setposition(-180, -30)
+    scorestring = "Use arrows to control.\nPress q to exit." 
+    mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
+    wn.tracer()
+    turtle.listen()
+
 def endGame():
     wn.bye()
 
@@ -75,7 +95,8 @@ turtle.onkey(turnleft, "Left")
 turtle.onkey(turnright, "Right")
 turtle.onkey(increasespeed, "Up")
 turtle.onkey(decreasespeed, "Down")
-turtle.onkey(endGame, "Return")
+turtle.onkey(scoreBoard, "Return")
+turtle.onkey(endGame, "q")
 
 while True:
     player.forward(speed)
@@ -83,11 +104,9 @@ while True:
     #Boundary checking
     if player.xcor() > 290 or player.xcor() < -290:
         player.right(180)
-        os.system("aplay bounce.mp3&")
 
     if player.ycor() > 290 or player.ycor() < -290:
         player.right(180)
-        os.system("aplay bounce.mp3&")
 
     #Move the goal
     for count in range(maxGaols):
@@ -96,17 +115,15 @@ while True:
         #Goal checking
         if goals[count].xcor() > 290 or goals[count].xcor() < -290:
             goals[count].right(180)
-            os.system("aplay bounce.mp3&")
 
         if goals[count].ycor() > 290 or goals[count].ycor() < -290:
             goals[count].right(180)
-            os.system("aplay bounce.mp3&")
 
         #Collision checking
         if isCollision(player, goals[count]):
             goals[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
             goals[count].right(random.randint(0, 360))
-            os.system("aplay bounce.mp3&")
+            bounce()
             score += 1
 
 			#Draw the score on the screen
@@ -114,7 +131,7 @@ while True:
             mypen.penup()
             mypen.hideturtle()
             mypen.setposition(-290, 310)
-            scorestring = "Score: %s" %score
+            scorestring = "Score: %s\tPress Enter for help" %score
             mypen.write(scorestring, False, align="left", font=("Arial",14, "normal"))
 
-delay = raw_input("Press enter to finish.")
+delay = raw_input("Press q to finish.")
