@@ -1,7 +1,6 @@
 import turtle
 import math
 import random
-import os
 import pygame
 
 #setup Screen
@@ -24,7 +23,7 @@ mypen.hideturtle()
 
 #Create player turtle
 player = turtle.Turtle()
-player.color("blue")
+player.color("lightblue")
 player.shape("turtle")
 player.penup()
 player.speed(0)
@@ -33,15 +32,26 @@ player.speed(0)
 score = 0
 
 #Create goals
-maxGaols = 6
+maxGoals = 6
 goals = []
-for count in range(maxGaols):
+for count in range(maxGoals):
     goals.append(turtle.Turtle())
     goals[count].color("red")
     goals[count].shape("circle")
     goals[count].penup()
     goals[count].speed(0)
     goals[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
+
+#Create enemies
+maxEnemies = 2
+enemies = []
+for count in range(maxEnemies):
+    enemies.append(turtle.Turtle())
+    enemies[count].color("green")
+    enemies[count].shape("circle")
+    enemies[count].penup()
+    enemies[count].speed(0)
+    enemies[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
 
 #Set speed variable
 speed = 1
@@ -89,6 +99,20 @@ def scoreBoard():
 def endGame():
     wn.bye()
 
+def gameOver():
+    player.hideturtle()
+    for count in range(maxGoals):
+        goals[count].hideturtle()
+    for count in range(maxEnemies):
+        enemies[count].hideturtle()
+    mypen.undo()
+    mypen.penup()
+    mypen.hideturtle()
+    mypen.setposition(-55, -15)
+    scorestring = "Score: %s\n"%score 
+    write = mypen.write(scorestring, False, align="left", font=("Arial",30, "normal"))
+    turtle.ontimer(write, 5000)
+
 #Set keyboard bindings
 turtle.listen()
 turtle.onkey(turnleft, "Left")
@@ -108,8 +132,24 @@ while True:
     if player.ycor() > 290 or player.ycor() < -290:
         player.right(180)
 
+    #Move the enemies
+    for count in range(maxEnemies):
+        enemies[count].forward(2)
+
+        #Enemy checking
+        if enemies[count].xcor() > 290 or enemies[count].xcor() < -290:
+            enemies[count].right(180)
+
+        if enemies[count].ycor() > 290 or enemies[count].ycor() < -290:
+            enemies[count].right(180)
+
+        if isCollision(player, enemies[count]):
+            bounce()
+            gameOver()
+            quit()
+
     #Move the goal
-    for count in range(maxGaols):
+    for count in range(maxGoals):
         goals[count].forward(2)
 
         #Goal checking
