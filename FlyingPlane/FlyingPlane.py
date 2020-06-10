@@ -177,5 +177,3 @@ while True:
             mypen.color("white")
             scorestring = "Score: %s\tPress h for help and pause" %score
             mypen.write(scorestring, False, align="left", font=("Arial",14, "normal"))
-
-delay = raw_input("Press q to finish.")
