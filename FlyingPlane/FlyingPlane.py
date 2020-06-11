@@ -5,8 +5,8 @@ import pygame
 
 #setup Screen
 wn = turtle.Screen()
-wn.bgcolor("black")
-wn.bgpic("space.gif")
+wn.bgcolor("white")
+#wn.bgpic("space.gif")
 wn.tracer(3)
 
 #Draw border
@@ -87,6 +87,7 @@ def isCollision(t1, t2):
     return (d < 20)
 
 mypen = turtle.Turtle()
+mypen.hideturtle()
 def help():
     mypen.undo()
     mypen.penup()
