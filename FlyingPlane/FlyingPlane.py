@@ -5,8 +5,8 @@ import pygame
 
 #setup Screen
 wn = turtle.Screen()
-wn.bgcolor("white")
-#wn.bgpic("space.gif")
+wn.bgcolor("black")
+wn.bgpic("space.gif")
 wn.tracer(3)
 
 #Draw border
