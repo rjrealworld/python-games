@@ -40,7 +40,7 @@ for count in range(maxGoals):
     goals[count].shape("circle")
     goals[count].penup()
     goals[count].speed(0)
-    goals[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
+    goals[count].setposition(random.randint(-290, 290), random.randint(-290, 290))
 
 #Create enemies
 maxEnemies = 3
@@ -51,7 +51,7 @@ for count in range(maxEnemies):
     enemies[count].shape("circle")
     enemies[count].penup()
     enemies[count].speed(0)
-    enemies[count].setposition(random.randint(-300, 300), random.randint(-300, 300))
+    enemies[count].setposition(random.randint(-290, 290), random.randint(-290, 290))
 
 #Set speed variable
 speed = 1
