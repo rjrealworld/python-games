@@ -13,8 +13,6 @@ def create_food(snake, box):
             food = None
     return food
 
-
-
 def print_score(stdscr, score):
     sh, sw = stdscr.getmaxyx()
     score_text = 'Score: {}'.format(score)
