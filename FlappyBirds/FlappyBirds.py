@@ -33,7 +33,7 @@ def welcomeScreen():
                 sys.exit()
 
             # If the user presses space or up key, start the game for them
-            elif event.type==KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            elif (event.type==KEYDOWN and (event.key == K_SPACE or event.key == K_UP) or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1)):
                 return
             else:
                 SCREEN.blit(GAME_SPRITES['background'], (0, 0))    
@@ -80,12 +80,11 @@ def mainGame():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+            if( event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP) or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1)):
                 if playery > 0:
                     playerVelY = playerFlapAccv
                     playerFlapped = True
                     GAME_SOUNDS['wing'].play()
-
 
         crashTest = isCollide(playerx, playery, upperPipes, lowerPipes) # This function will return true if the player is crashed
         if crashTest:
