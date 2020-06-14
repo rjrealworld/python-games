@@ -32,6 +32,7 @@ wn.bgpic("space_invaders_background.gif")
 #Register the shapes
 turtle.register_shape("invader.gif")
 turtle.register_shape("player.gif")
+turtle.register_shape("bullet.gif")
 
 #Draw border
 border_pen = turtle.Turtle()
@@ -95,7 +96,7 @@ enemyspeed = 2
 #Create the player's bullet
 bullet = turtle.Turtle()
 bullet.color("yellow")
-bullet.shape("triangle")
+bullet.shape("bullet.gif")
 bullet.penup()
 bullet.speed(0)
 bullet.setheading(90)
@@ -139,7 +140,7 @@ def fire_bullet():
 
 def isCollision(t1, t2):
 	distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(),2)+math.pow(t1.ycor()-t2.ycor(),2))
-	return distance < 15
+	return distance < 25
 
 mypen = turtle.Turtle()
 mypen.hideturtle()
@@ -192,7 +193,7 @@ while True:
 		enemy.setx(x)
 
 		#Move the enemy back and down
-		if enemy.xcor() > 280:
+		if enemy.xcor() > 270:
 			#Move all enemies down
 			for e in enemies:
 				y = e.ycor()
@@ -201,7 +202,7 @@ while True:
 			#Change enemy direction
 			enemyspeed *= -1
 		
-		if enemy.xcor() < -280:
+		if enemy.xcor() < -270:
 			#Move all enemies down
 			for e in enemies:
 				y = e.ycor()
@@ -227,7 +228,7 @@ while True:
 			score_pen.clear()
 			score_pen.write(scorestring, False, align="left", font=("Arial", 14, "normal"))
 		
-		if isCollision(player, enemy) or enemy.ycor() <= -240:
+		if isCollision(player, enemy) or enemy.ycor() <= -230:
 			explosion()
 			player.hideturtle()
 			enemy.hideturtle()
